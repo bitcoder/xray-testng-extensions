@@ -60,3 +60,7 @@ In order to add attachments to the result, you need to add File objects to an ar
 ## References
 - [Example using TestNG with Xray on Jira server/DC](https://confluence.xpand-it.com/display/XRAY/Testing+using+TestNG+in+Java)
 - [Example using TestNG with Xray on Jira Cloud](https://confluence.xpand-it.com/display/XRAYCLOUD/Testing+using+TestNG+in+Java)
+
+## LICENSE
+
+[MIT](LICENSE)
