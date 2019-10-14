@@ -7,6 +7,8 @@ This code is provided as-is; you're free to use it and modify it at your will.
 
 Just copy the source of this project to your existing TestNG based project. Listener classes and the corresponding configuration should automatically be loaded by TestNG.
 
+**This will be available as a maven artifact later on**
+
 ## New annotations
 
 You may use the 
