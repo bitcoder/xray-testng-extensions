@@ -1,6 +1,6 @@
 # xray-testng-extensions
 
-This repo contains several extensions, implemented as listeners, that allow you to take better advantage of TestNG whenever using it together with [Xray Test Management](https://getxray.app).
+This repo contains several extensions, implemented as listeners, that allow you to take better advantage of [TestNG](https://testng.org/) whenever using it together with [Xray Test Management](https://getxray.app).
 This code is provided as-is; you're free to use it and modify it at your will.
 
 ## Installing
