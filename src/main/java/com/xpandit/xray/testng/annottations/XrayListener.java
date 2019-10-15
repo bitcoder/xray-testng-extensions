@@ -1,5 +1,5 @@
 
-package com.xpand.annotations;
+package com.xpandit.testng.annotations;
 
 import java.lang.reflect.Method;
 
