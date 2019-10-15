@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xpandit.xray</groupId>
+    <artifactId>xray-testng-extensions</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+    <name>xray-testng-extensions</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>/Users/smsf/exps/testng/build/libs/testng-7.0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        -->
+ 
+         <dependency>
+             <groupId>org.testng</groupId>
+             <artifactId>testng</artifactId>
+             <version>7.0.0</version>
+         </dependency>
+ 
+ 
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.72</version>
+        </dependency>
+        
+    </dependencies>
+    
+    <distributionManagement>
+        <repository>
+            <id>xpand-releases</id>
+            <name>xpand-releases</name>
+            <url>http://maven.xpand-it.com/artifactory/libs-releases-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>xpand-snapshots</id>
+            <name>xpand-snapshots</name>
+            <url>http://maven.xpand-it.com/artifactory/libs-snapshots-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+  
+    
+    
+    <build>
+        <plugins>
+            
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.9.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+     
+ 
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-source-plugin</artifactId>
+                 <version>3.0.1</version>
+                 <executions>
+                     <execution>
+                         <id>attach-sources</id>
+                         <goals>
+                             <goal>jar</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+ 
+             
+        </plugins>
+    </build>
+  
+  
+</project>
