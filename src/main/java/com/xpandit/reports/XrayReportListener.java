@@ -1,4 +1,4 @@
-package com.xpand.reports;
+package com.xpandit.testng.reports;
 
 import java.util.Properties;
 import org.testng.ITestResult;
