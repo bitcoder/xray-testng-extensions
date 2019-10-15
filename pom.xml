@@ -15,7 +15,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -23,14 +22,6 @@
             <scope>system</scope>
             <systemPath>/Users/smsf/exps/testng/build/libs/testng-7.0.1-SNAPSHOT.jar</systemPath>
         </dependency>
-        -->
- 
-         <dependency>
-             <groupId>org.testng</groupId>
-             <artifactId>testng</artifactId>
-             <version>7.0.0</version>
-         </dependency>
- 
  
         <dependency>
             <groupId>com.beust</groupId>
