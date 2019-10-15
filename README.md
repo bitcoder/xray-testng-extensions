@@ -5,9 +5,29 @@ This code is provided as-is; you're free to use it and modify it at your will.
 
 ## Installing
 
-Just copy the source of this project to your existing TestNG based project. Listener classes and the corresponding configuration should automatically be loaded by TestNG.
+Configure the maven repository in your pom.xml:
 
-**This will be available as a maven artifact later on**
+```
+        <repository>
+                <id>xpandit</id>
+                <name>xpand-releases</name>
+                <url>http://maven.xpand-it.com/artifactory/releases</url>
+                <releases>
+                        <enabled>true</enabled>
+                </releases>
+        </repository>
+```        
+
+Add the following dependency to your pom.xml:
+
+```
+        <dependency>
+          <groupId>com.xpandit.xray</groupId>
+          <artifactId>xray-testng-extensions</artifactId>
+          <version>1.0.0</version>
+          <scope>test</scope>
+        </dependency>
+```
 
 ## New annotations
 
@@ -43,7 +63,7 @@ _Examples:_
 
 ## Embed attachments in TestNG's XML report (TestNG 7.1 onwards)
 
-*Note: please switch to testng_v71 branch first; this feature requires TestNG >= 7.1 and a compatible version of Xray*!
+*Note: please switch to testng_v71 branch first; this feature requires TestNG >= 7.1 (when available) and a compatible version of Xray*!
 
 
 In order to add attachments to the result, you need to add File objects to an array that you need to set as an attribute named "attachments" on the ITestResult.
