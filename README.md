@@ -1,10 +1,13 @@
 # xray-testng-extensions
 
-This repo contains several extensions, implemented as listeners, that allow you to take better advantage of TestNG whenever using it together with [Xray Test Management](https://getxray.app).
+This repo contains several extensions, implemented as listeners, that allow you to take better advantage of [TestNG](https://testng.org/) whenever using it together with [Xray Test Management](https://getxray.app).
+This code is provided as-is; you're free to use it and modify it at your will.
 
 ## Installing
 
 Just copy the source of this project to your existing TestNG based project. Listener classes and the corresponding configuration should automatically be loaded by TestNG.
+
+**This will be available as a maven artifact later on**
 
 ## New annotations
 
@@ -60,6 +63,15 @@ In order to add attachments to the result, you need to add File objects to an ar
 ## References
 - [Example using TestNG with Xray on Jira server/DC](https://confluence.xpand-it.com/display/XRAY/Testing+using+TestNG+in+Java)
 - [Example using TestNG with Xray on Jira Cloud](https://confluence.xpand-it.com/display/XRAYCLOUD/Testing+using+TestNG+in+Java)
+- [original discussion on customization of TestNG XML report](https://github.com/cbeust/testng/issues/2171)
+
+
+
+## Contact
+
+You may find me on [Twitter](https://twitter.com/darktelecom).
+Any questions related with this code, please raise here issues. Feel free to contribute and submit PR's.
+For Xray specific questions, please contact [Xray's support team](https://jira.xpand-it.com/servicedesk/customer/portal/2).
 
 ## LICENSE
 

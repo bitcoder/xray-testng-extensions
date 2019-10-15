@@ -1,2 +1,2 @@
-com.xpand.annotations.XrayListener
-com.xpand.reports.XrayReportListener
+com.xpandit.testng.annotations.XrayListener
+com.xpandit.testng.reports.XrayReportListener

@@ -1,4 +1,4 @@
-package com.xpand.annotations;
+package com.xpandit.testng.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
