@@ -63,7 +63,7 @@ _Examples:_
 
 ## Embed attachments in TestNG's XML report (TestNG 7.1 onwards)
 
-*Note: please switch to testng_v71 branch first; this feature requires TestNG >= 7.1 (when available) and a compatible version of Xray*!
+*Note: please switch to testng_v71 branch first; this feature requires TestNG >= 7.1 and a compatible version of Xray*!
 
 
 In order to add attachments to the result, you need to add File objects to an array that you need to set as an attribute named "attachments" on the ITestResult.
