@@ -1,6 +1,8 @@
 # xray-testng-extensions (DEPRECATED)
 
-**This repo is no longer maintained; please us [this one](https://github.com/Xray-App/xray-testng-extensions) instead!**
+ ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) 
+ **This repo is no longer maintained; please us [this one](https://github.com/Xray-App/xray-testng-extensions) instead!**
+  ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) 
 
 This repo contains several extensions, implemented as listeners, that allow you to take better advantage of [TestNG](https://testng.org/) whenever using it together with [Xray Test Management](https://getxray.app).
 This code is provided as-is; you're free to use it and modify it at your will.
