@@ -1,7 +1,8 @@
-# xray-testng-extensions (DEPRECATED)
+# xray-testng-extensions
 
- ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) 
-  ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) 
+[![build workflow](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/CI.yml/badge.svg)](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/CI.yml)
+[![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/Xray-App/community)
 
 This repo contains several extensions, implemented as listeners, that allow you to take better advantage of [TestNG](https://testng.org/) whenever using it together with [Xray Test Management](https://getxray.app).
 This code is provided as-is; you're free to use it and modify it at your will (see license ahead).
