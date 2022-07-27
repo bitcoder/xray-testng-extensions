@@ -1,6 +1,6 @@
 # xray-testng-extensions
 
-[![build workflow](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/CI.yml/badge.svg)](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/CI.yml)
+[![build workflow](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/maven.yml/badge.svg)](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/maven.yml)
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/Xray-App/community)
 
