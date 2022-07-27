@@ -1,5 +1,5 @@
 
-package com.xpandit.testng.annotations;
+package app.getxray.xray.testng.listeners;
 
 import java.lang.reflect.Method;
 
@@ -9,17 +9,22 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
+
+import app.getxray.xray.testng.annotations.Requirement;
+import app.getxray.xray.testng.annotations.XrayTest;
+
 import static java.lang.System.out;
 import static java.lang.System.err;
 
 /**
- * The listener interface for receiving Xray events.
- * The Listener can be automatically invoked when TestNG tests are run by using ServiceLoader mechanism.
+ * The listener interface for receiving events related to execution of tests, and process Xray related annotations.
+ * The listener can be automatically invoked when TestNG tests are run by using ServiceLoader mechanism.
  * You can also add this listener to a TestNG Test class by adding
- * <code>@Listeners({com.xpand.java.XrayAnnotationListener.class})</code>
+ * <code>@Listeners({app.getxray.testng.XrayListener.class})</code>
  * before the test class
  *
- * @see Xray
+ * @see XrayTest
+ * @see Requirement
  */
 public class XrayListener implements IInvokedMethodListener, ITestListener  {
     
@@ -30,10 +35,15 @@ public class XrayListener implements IInvokedMethodListener, ITestListener  {
      * @see org.testng.IInvokedMethodListener#beforeInvocation(org.testng.IInvokedMethod, org.testng.ITestResult)
      */
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-        if(method.isTestMethod() && annotationPresent(method, Xray.class) ) {
-            testResult.setAttribute("requirement", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(Xray.class).requirement());  
-            testResult.setAttribute("test", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(Xray.class).test());
-            testResult.setAttribute("labels", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(Xray.class).labels());
+        if(method.isTestMethod() && annotationPresent(method, XrayTest.class) ) {
+            testResult.setAttribute("summary", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(XrayTest.class).summary());
+            testResult.setAttribute("description", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(XrayTest.class).description()); 
+            testResult.setAttribute("test", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(XrayTest.class).key());
+            testResult.setAttribute("labels", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(XrayTest.class).labels());
+        }
+
+        if(method.isTestMethod() && annotationPresent(method, Requirement.class) ) {
+            testResult.setAttribute("requirement", method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(Requirement.class).key());  
         }
     }
 
@@ -56,27 +66,22 @@ public class XrayListener implements IInvokedMethodListener, ITestListener  {
     }
 
     public void onTestStart(ITestResult result) {
-        // TODO Auto-generated method stub
         
     }
 
     public void onTestSuccess(ITestResult result) {
-        // TODO Auto-generated method stub
         
     }
 
     public void onTestFailure(ITestResult result) {
-        // TODO Auto-generated method stub
         
     }
 
     public void onTestSkipped(ITestResult result) {
-        // TODO Auto-generated method stub
         
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        // TODO Auto-generated method stub
         
     }
 
@@ -85,8 +90,7 @@ public class XrayListener implements IInvokedMethodListener, ITestListener  {
     }
 
     public void onFinish(ITestContext context) {
-        // TODO Auto-generated method stub
-        
+
     }
     
 

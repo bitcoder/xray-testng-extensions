@@ -1,3 +1,6 @@
+.vscode/
 .DS_Store
 target/
 deploy_to_github.sh
+*.class
+test-output/

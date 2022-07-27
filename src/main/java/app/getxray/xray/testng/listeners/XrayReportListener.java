@@ -1,4 +1,4 @@
-package com.xpandit.testng.reports;
+package app.getxray.xray.testng.listeners;
 
 import java.util.Properties;
 import org.testng.ITestResult;
@@ -7,7 +7,6 @@ import org.testng.reporters.XMLStringBuffer;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Base64;
-import java.util.Base64.Encoder;
 
 public class XrayReportListener extends XMLReporter {
 
