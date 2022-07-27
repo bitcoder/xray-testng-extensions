@@ -1,6 +1,8 @@
 # xray-testng-extensions
 
 [![build workflow](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/maven.yml/badge.svg)](https://github.com/Xray-App/xray-testng-extensions/actions/workflows/maven.yml)
+![code coverage](
+https://raw.githubusercontent.com/Xray-App/xray-testng-extensions/main/.github/badges/jacoco.svg)
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/Xray-App/community)
 
