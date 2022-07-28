@@ -6,7 +6,8 @@ https://raw.githubusercontent.com/Xray-App/xray-testng-extensions/master/.github
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/Xray-App/community)
 
-This repo contains several extensions, implemented as listeners, that allow you to take better advantage of [TestNG](https://testng.org/) whenever using it together with [Xray Test Management](https://getxray.app).
+This repo contains several enhancements to TestNG to allow you to take better advantage of [TestNG](https://testng.org/) whenever using it together with [Xray Test Management](https://getxray.app). This includes specific annotations and listener(s) that can then process their information.
+
 This code is provided as-is; you're free to use it and modify it at your will (see license ahead).
 
 This is a preliminary release so it is subject to changes, at any time.
@@ -56,7 +57,13 @@ Add the following dependency to your pom.xml:
 
 For the time being, there are no specific configurations to change the behavior of the provided listeners, as it is not needed.
 
-## How to use
+However, to use this package you need to follow some steps as described ahead.
+At high-level, you need to:
+
+- enable the *XrayListener* listener
+- configure TestNG's XMLReporter to include user-defined attributes on the report
+
+### Enable the listener(s)
 
 In order to generate the enhanced, customized TestNG XML report we need to register the **XrayListener** listener. This can be done in [several ways](https://testng.org/doc/documentation-main.html#testng-listeners):
 
@@ -94,8 +101,63 @@ Registering the listener is mandatory.
 In order to take advantage of the capabilities of this new listener, the new annotations can be used.
 
 Note: there's another listener _XrayReportListener_ but you don't need to use it, as it is only required to further customize the TestNG XML report (e.g., for adding attachments) => this is not yet supported by Xray.
+### Configure Maven to use TestNG XMLReporter and enable user-defined test attributes
 
-### New annotations
+For Maven, we can configure the surefire plugin and define a property `reporter` to enable the user-defined test attributes on the XML report, that will contain the values we provided using the annotations.
+
+```xml
+...
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version> 2.20.1</version>
+
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+
+                    <suiteXmlFiles>
+                      <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+
+                    <properties>
+                        <property>
+                            <name>reporter</name>
+                            <value>org.testng.reporters.XMLReporter:generateTestResultAttributes=true</value>
+                        </property>
+                    </properties>
+
+                </configuration>
+             </plugin>
+
+        ...
+        </plugins>
+    </build>
+```
+
+### Configure Gradle to use TestNG XMLReporter and enable user-defined test attributes
+
+For Gradle, we need to use a custom task, as the standard `test` task doesn't allow us to set attributes on the XMLReporter used by TestNG.
+
+As an example, we could create a `testngTest` task that runs TestNG tests and enabled the intended behavior on the XMLReporter.
+
+```gradle
+task testngTest(type: JavaExec, dependsOn: [classes]) {
+    group 'Verification'
+    description 'Run TestNG tests'
+    mainClass = 'org.testng.TestNG'
+    args('testng.xml', '-reporter',
+            'org.testng.reporters.XMLReporter:generateTestResultAttributes=true,generateGroupsAttribute=true'
+    )
+    classpath = sourceSets.test.runtimeClasspath
+}
+```
+
+## How to use
+
+### Using new annotations
 
 Two new annotations (`@XrayTest`, `@Requirement`) can be used.
 The annotations are optional and cannot be use more than once per test method.
@@ -138,8 +200,7 @@ _Examples:_
 
 #### @Requirement
 
-You may use the **Requirement** annotation, before your test methods in order to identify the covered requirement(s).
-It's possible to identify one covered issue (e.g. requirement) or more, even though it's a good practice to cover just one.
+You may use the **Requirement** annotation, before your test methods in order to identify the covered requirement.
 
 _Examples:_
 
@@ -152,15 +213,31 @@ _Examples:_
     public void CanAddNumbers()
 ```
 
-2. use this test to cover two requirements/user stories identified by the issue keys CALC-1234, CALC-1235 (i.e create a issue link "tests" between the Test issue and the identified requirements).
+### Using the test result within the test method
+
+It's possible also to set attributes related to the test method, during the test execution lifecycle, through the ITestResult interface. This is more verbose than using the annotations approach though.
+
 
 ```java
+import org.testng.Reporter;
+...
+
+public class CalcTest {
+
     @Test
-    @Requirement({"CALC-1234", "CALC-1235"})
     public void CanAddNumbers()
+    {
+        Assert.assertEquals(Calculator.Add(1, 1),2);
+        Assert.assertEquals(Calculator.Add(-1, 1),0);
+
+        ITestResult result = Reporter.getCurrentTestResult();
+        result.setAttribute("requirement", "CALC-1234");   // Xray will try to create a link to this requirement issue
+        result.setAttribute("test", "CALC-2");             // Xray will try to find this Test issue and report result against it
+        result.setAttribute("labels", "core addition");    // Xray will add this(ese) label(s) to the associated Test issue
+    }
+
+}
 ```
-
-
 
 
 ## Embed attachments in TestNG's XML report (TestNG 7.1 onwards)
@@ -192,6 +269,11 @@ Then, in the test code, yoou can add File objects to an array that you need to s
 
 The *XrayReportListener* will process the attribute `attachments` and will add them to the TestNG XML report, in a custom `<attachments>` XML section that Xray can process.
 
+### 
+
+```java
+```
+
 ## Background
 
 .
@@ -199,11 +281,20 @@ The *XrayReportListener* will process the attribute `attachments` and will add t
 ## TO DOs
 
 - evaluate the merge of XrayListener and XrayReportListener, even though the later is not yet usable
-- review javadocs
+- improve javadocs
 
 ## FAQ
 
-.
+1. I want to use the Xray annotations; do I need to use any listener at all?
+
+Yes. You need to enable the *XrayListener* listener, so that it can process the information from the annotations and add them as attributes on the corresponding `<test-method>` element on the TestNG XML report.
+
+2. I ran the tests but the TestNG XML report doesn't contain any information at all that I provided using the Xray related annotations.
+
+First, make sure you enabled the *XrayListener* listener; second, you need to configure your build tool (e.g., Maven) so that TestNG's XMLReporter can include user-defined attributes at test level; for that, the `generateTestResultAttributes` should be set as true.
+
+org.testng.reporters.XMLReporter:generateTestResultAttributes=true
+
 
 ## Contact
 
