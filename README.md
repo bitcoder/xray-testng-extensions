@@ -61,19 +61,19 @@ However, to use this package you need to follow some steps as described ahead.
 At high-level, you need to:
 
 - enable the *XrayListener* listener
-- configure TestNG's XMLReporter to include user-defined attributes on the report
+- configure TestNG's XMLReporter to include user-defined attributes on the report, on Maven's `pom.xml` or on Gradle
 
-### Enable the listener(s)
+### 1. Enable the listener(s)
 
 In order to generate the enhanced, customized TestNG XML report we need to register the **XrayListener** listener. This can be done in [several ways](https://testng.org/doc/documentation-main.html#testng-listeners):
 
-- discovered automatically at runtime based by the ServiceLoader based on the contents of a file (e.g `src/test/resources/META-INF/services/org.testng.ITestNGListener`); this is probably the easiest one.
+- it can be discovered automatically at runtime by the ServiceLoader based on the contents of a file (e.g `src/test/resources/META-INF/services/org.testng.ITestNGListener`); this is probably the easiest one.
 
 ```bash
 app.getxray.xray.testng.listeners.XrayListener
 ```
 
-- on `the testng.xml` file
+- or by specifying it on `the testng.xml` file
 
 ```xml
 <suite>
@@ -85,7 +85,7 @@ app.getxray.xray.testng.listeners.XrayListener
 ...
 ```
 
-- by annotating the test class
+- or by annotating the test class
 
 ```java
 @Listeners({ app.getxray.xray.testng.listeners.XrayListener.class })
@@ -94,14 +94,14 @@ public class MyTest {
 }
 ```
 
-- programmaticaly
-- from the command line
+- or programmaticaly
+- or from the command line
 
 Registering the listener is mandatory.
 In order to take advantage of the capabilities of this new listener, the new annotations can be used.
 
 Note: there's another listener _XrayReportListener_ but you don't need to use it, as it is only required to further customize the TestNG XML report (e.g., for adding attachments) => this is not yet supported by Xray.
-### Configure Maven to use TestNG XMLReporter and enable user-defined test attributes
+### 2a. Configure Maven to use TestNG XMLReporter and enable user-defined test attributes
 
 For Maven, we can configure the surefire plugin and define a property `reporter` to enable the user-defined test attributes on the XML report, that will contain the values we provided using the annotations.
 
@@ -113,7 +113,7 @@ For Maven, we can configure the surefire plugin and define a property `reporter`
 
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version> 2.20.1</version>
+                <version>2.20.1</version>
 
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
@@ -137,7 +137,7 @@ For Maven, we can configure the surefire plugin and define a property `reporter`
     </build>
 ```
 
-### Configure Gradle to use TestNG XMLReporter and enable user-defined test attributes
+### 2b. Configure Gradle to use TestNG XMLReporter and enable user-defined test attributes
 
 For Gradle, we need to use a custom task, as the standard `test` task doesn't allow us to set attributes on the XMLReporter used by TestNG.
 
@@ -291,10 +291,7 @@ Yes. You need to enable the *XrayListener* listener, so that it can process the 
 
 2. I ran the tests but the TestNG XML report doesn't contain any information at all that I provided using the Xray related annotations.
 
-First, make sure you enabled the *XrayListener* listener; second, you need to configure your build tool (e.g., Maven) so that TestNG's XMLReporter can include user-defined attributes at test level; for that, the `generateTestResultAttributes` should be set as true.
-
-org.testng.reporters.XMLReporter:generateTestResultAttributes=true
-
+First, make sure you enabled the *XrayListener* listener; second, you need to configure your build tool (e.g., Maven) so that TestNG's XMLReporter can include user-defined attributes at test level; for that, the `generateTestResultAttributes` should be set as true (see above documentation).
 
 ## Contact
 
