@@ -209,7 +209,7 @@ _Examples:_
 
 ```java
     @Test
-    @Requirement("CALC-1234")
+    @Requirement(key = "CALC-1234")
     public void CanAddNumbers()
 ```
 
