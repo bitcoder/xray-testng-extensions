@@ -169,8 +169,8 @@ Test methods don't need to be annotated with `@XrayTest` unless you want to take
 You may use the **@XrayTest** annotation to:
 
 - enforce mapping of result to specific, existing Test identified by issue key, using the **key** attribute
-- enforce the summary on the corresponding Test issue, during auto-provisioning, using the **summary** attribute
-- enforce the description on the corresponding Test issue, during auto-provisioning, using the **description** attribute
+- (Xray server/datacenter only) enforce the summary on the corresponding Test issue, during auto-provisioning, using the **summary** attribute
+- (Xray server/datacenter only) enforce the description on the corresponding Test issue, during auto-provisioning, using the **description** attribute
 
 _Examples:_
 
